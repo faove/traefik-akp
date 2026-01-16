@@ -13,10 +13,12 @@ services:
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencrypt.acme.email=no-reply@elantarone.com"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-
+      - "--serversTransport.forwardingTimeouts.dialTimeout=30s"
+      - "--serversTransport.forwardingTimeouts.responseHeaderTimeout=180s"
     ports:
       - "80:80"
       - "443:443"
+      - "8080:8080"
 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
