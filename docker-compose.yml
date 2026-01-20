@@ -7,6 +7,8 @@ services:
       - "--api.insecure=true"
       - "--api.dashboard=true"
       - "--providers.docker=true"
+      - "--providers.file.directory=/etc/traefik/dynamic"
+      - "--providers.file.watch=true"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--providers.docker.exposedbydefault=false"
@@ -25,6 +27,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./letsencrypt:/letsencrypt
       - ./logs:/logs
+      - ./dynamic:/etc/traefik/dynamic
 
     networks:
       - elantar_proxy

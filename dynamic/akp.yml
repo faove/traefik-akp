@@ -1,0 +1,16 @@
+http:
+  routers:
+    akp:
+      rule: "Host(`akp.elantarone.com`)"
+      entrypoints:
+        - web
+        - websecure
+      service: akp-service
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    akp-service:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:8081"
