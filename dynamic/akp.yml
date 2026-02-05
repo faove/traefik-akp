@@ -14,3 +14,5 @@ http:
       loadBalancer:
         servers:
           - url: "http://host.docker.internal:8081"
+
+
