@@ -1,5 +1,6 @@
 http:
   routers:
+    # Production
     akp:
       rule: "Host(`akp.elantarone.com`)"
       entrypoints:
@@ -9,10 +10,25 @@ http:
       tls:
         certResolver: letsencrypt
 
+    # Development
+    akp-dev:
+      rule: "Host(`dev.akp.elantarone.com`)"
+      entrypoints:
+        - web
+        - websecure
+      service: akp-dev-service
+      tls:
+        certResolver: letsencrypt
+
   services:
     akp-service:
       loadBalancer:
         servers:
           - url: "http://host.docker.internal:8081"
+
+    akp-dev-service:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:8082"
 
 
