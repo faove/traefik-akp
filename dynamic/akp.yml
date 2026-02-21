@@ -20,6 +20,16 @@ http:
       tls:
         certResolver: letsencrypt
 
+    # Test
+    akp-test:
+      rule: "Host(`test.akp.elantarone.com`)"
+      entrypoints:
+        - web
+        - websecure
+      service: akp-test-service
+      tls:
+        certResolver: letsencrypt
+
   services:
     akp-service:
       loadBalancer:
@@ -30,5 +40,10 @@ http:
       loadBalancer:
         servers:
           - url: "http://host.docker.internal:8082"
+
+    akp-test-service:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:8083"
 
 
